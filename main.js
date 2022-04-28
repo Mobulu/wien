@@ -24,4 +24,9 @@ let layerControl = L.control.layers({
     "Basemap Oberfläche": L.tileLayer.provider ("BasemapAT.surface"), 
     "Basemap Orthofoto": L.tileLayer.provider ("BasemapAT.orthofoto"), 
     "Basemap Beschriftung": L.tileLayer.provider ("BasemapAT.overlay"), 
+    "Basemap mit Orthofoto und Beschriftung": L.layerGroup([
+        L.tileLayer.provider ("BasemapAT.orthofoto"), 
+        L.tileLayer.provider ("BasemapAT.overlay"),
+    ])
 }).addTo(map);
+
