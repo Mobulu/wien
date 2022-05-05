@@ -97,3 +97,17 @@ async function loadLines(url) {
     L.geoJSON(geojson).addTo(overlay);
  }
 loadLines ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
+
+// Fußgängerzonen
+async function loadZones(url) {
+    let response = await fetch(url);
+    let geojson = await response.json(); 
+    //console.log(geojson);
+ 
+    let overlay = L.featureGroup();
+    layerControl.addOverlay(overlay, "Fußgängerzonen");
+    overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
+ 
+    L.geoJSON(geojson).addTo(overlay);
+ }
+loadZones ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
