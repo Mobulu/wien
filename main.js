@@ -48,6 +48,6 @@ L.control.scale({
 L.control.fullscreen().addTo(map);
 
 //Minimap
-let miniMap = new L.control.MiniMap(
-    L.tileLayer.provider("Basemap AT")
+let miniMap = new L.Control.MiniMap(
+    L.tileLayer.provider("BasemapAT")
 ).addTo(map);
