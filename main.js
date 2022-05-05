@@ -10,7 +10,7 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau")
 
 let map = L.map("map", {
     center: [ stephansdom.lat, stephansdom.lng ], 
-    zoom: 12,
+    zoom: 16,
     layers: [
         startLayer
     ]
