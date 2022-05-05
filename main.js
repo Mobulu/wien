@@ -34,7 +34,6 @@ layerControl.expand();
 
 /*
 let sightLayer = L.featureGroup();
-
 layerControl.addOverlay(sightLayer, "Sehenswürdigkeiten");
 
 let mrk = L.marker([ stephansdom.lat, stephansdom.lng]).addTo(sightLayer);
@@ -62,6 +61,10 @@ async function loadSites(url) {
    let geojson = await response.json(); 
    console.log(geojson);
 
-   L.geoJSON(geojson).addTo(map);
+   let overlay = L.featureGroup();
+   layerControl.addOverlay(overlay, "Sehenswürdigkeiten");
+   overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
+
+   L.geoJSON(geojson).addTo(overlay);
 }
 loadSites ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SEHENSWUERDIGOGD&srsName=EPSG:4326&outputFormat=json");
