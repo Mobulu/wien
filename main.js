@@ -68,7 +68,15 @@ async function loadSites(url) {
 
    L.geoJSON(geojson, {
        pointToLayer: function(geoJsonPoint, latlng) {
-           return L.marker(latlng);
+           //console.log(geoJsonPoint.properties.NAME);
+           let popup = `
+                <img src="${geoJsonPoint.properties.THUMBNAIL}" alt=""> <br>
+                <strong>${geoJsonPoint.properties.NAME}</strong>
+                <hr>
+                Adresse: ${geoJsonPoint.properties.ADRESSE} <br>
+                <a href="${geoJsonPoint.properties.WEITERE_INF}">Weblink</a>
+           `;
+           return L.marker(latlng).bindPopup(popup);
        }
    }).addTo(overlay);
 }
