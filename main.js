@@ -109,7 +109,7 @@ async function loadStops(url) {
             `;
             return L.marker(latlng, {
                 icon: L.icon({
-                     iconUrl: "icons/bus.png", 
+                     iconUrl: `icons/bus_${geoJsonPoint.properties.LINE_ID}.png`, 
                      iconAnchor: [16, 37], 
                      popupAnchor: [0, -37]
                 })
@@ -158,6 +158,24 @@ async function loadHotels(url) {
     layerControl.addOverlay(overlay, "Hotels und Unterkünfte");
     overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
  
-    L.geoJSON(geojson).addTo(overlay);
+    L.geoJSON(geojson, {
+        pointToLayer: function(geoJsonPoint, latlng) {
+            //L.marker(latlng).addTo(map)
+            //console.log(geoJsonPoint.properties.NAME);
+            let popup = `
+                 <strong>${geoJsonPoint.properties.BETRIEB}</strong>
+                 <hr>
+                 Adresse: ${geoJsonPoint.properties.ADRESSE} <br>
+                 <a href="${geoJsonPoint.properties.WEBLINK1}">Weblink</a>
+            `;
+            return L.marker(latlng, {
+                icon: L.icon({
+                     iconUrl: "icons/hotel.png", 
+                     iconAnchor: [16, 37], 
+                     popupAnchor: [0, -37]
+                })
+            }).bindPopup(popup);
+        }
+    }).addTo(overlay);
  }
-//loadHotels ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
+loadHotels ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
