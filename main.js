@@ -165,7 +165,11 @@ async function loadHotels(url) {
             let popup = `
                  <strong>${geoJsonPoint.properties.BETRIEB}</strong>
                  <hr>
+                 Betriebsart: ${geoJsonPoint.properties.BETRIEBSART_TXT} <br>
+                 Kategorie: ${geoJsonPoint.properties.KATEGORIE_TXT} <br>
                  Adresse: ${geoJsonPoint.properties.ADRESSE} <br>
+                 Telefonnummer: ${geoJsonPoint.properties.KONTAKT_TEL} <br>
+                 <a href="${geoJsonPoint.properties.KONTAKT_EMAIL}">E-Mailadresse</a> <br>
                  <a href="${geoJsonPoint.properties.WEBLINK1}">Weblink</a>
             `;
             return L.marker(latlng, {
