@@ -169,17 +169,39 @@ async function loadHotels(url) {
                  Kategorie: ${geoJsonPoint.properties.KATEGORIE_TXT} <br>
                  Adresse: ${geoJsonPoint.properties.ADRESSE} <br>
                  Telefonnummer: ${geoJsonPoint.properties.KONTAKT_TEL} <br>
-                 <a href="${geoJsonPoint.properties.KONTAKT_EMAIL}">E-Mailadresse</a> <br>
+                 <a href="${geoJsonPoint.properties.KONTAKT_EMAIL}">E-Mailadresse</a>
                  <a href="${geoJsonPoint.properties.WEBLINK1}">Weblink</a>
             `;
-            return L.marker(latlng, {
-                icon: L.icon({
-                     iconUrl: "icons/hotel.png", 
-                     iconAnchor: [16, 37], 
-                     popupAnchor: [0, -37]
+
+        if(geoJsonPoint.properties.BETRIEBSART_TXT == "Hotel") {
+                return L.marker(latlng, {
+                    icon: L.icon({
+                        iconUrl: "icons/hotel_0star.png", 
+                        iconAnchor: [16, 37], 
+                        popupAnchor: [0, -37]
                 })
             }).bindPopup(popup);
         }
+        else if (geoJsonPoint.properties.BETRIEBSART_TXT == "Pension") {
+            return L.marker(latlng, {
+                icon: L.icon({
+                    iconUrl: `icons/lodging_0star.png`,
+                    iconAnchor: [16, 37],
+                    popupAnchor: [0, -37]
+                })
+            }).bindPopup(popup);
+
+        } else {
+            return L.marker(latlng, {
+                icon: L.icon({
+                    iconUrl: `icons/apartment-2.png`,
+                    iconAnchor: [16, 37],
+                    popupAnchor: [0, -37]
+                })
+            }).bindPopup(popup);
+        }
+    }
     }).addTo(overlay);
  }
+
 loadHotels ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:UNTERKUNFTOGD&srsName=EPSG:4326&outputFormat=json");
