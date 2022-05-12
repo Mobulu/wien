@@ -136,9 +136,8 @@ async function loadLines(url) {
         von: ${layer.feature.properties.FROM_NAME}
         <br>
         nach: ${layer.feature.properties.TO_NAME}
-    `;
-        //return layer.feature.properties.LINE_NAME;
-}).addTo(map);
+        `;
+    }).addTo(map);
 }
 
 loadLines ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:TOURISTIKLINIEVSLOGD&srsName=EPSG:4326&outputFormat=json");
