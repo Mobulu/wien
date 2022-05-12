@@ -170,7 +170,13 @@ async function loadZones(url) {
     layerControl.addOverlay(overlay, "Fußgängerzonen");
     overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
 
-    L.geoJSON(geojson).addTo(overlay);
+    L.geoJSON(geojson).bindPopup(function (layer) {
+        return `
+        <h4>Fußgängerzone ${layer.feature.properties.ADRESSE}</h4>
+        <p>${layer.feature.properties.ZEITRAUM || ""}</p> // || = logical or-Operator
+        <p>${layer.feature.properties.AUSN_TEXT || ""}</p>
+        `;
+    }).addTo(overlay);
 }
 loadZones ("https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:FUSSGEHERZONEOGD&srsName=EPSG:4326&outputFormat=json");
 
