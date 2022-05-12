@@ -170,7 +170,16 @@ async function loadZones(url) {
     layerControl.addOverlay(overlay, "Fußgängerzonen");
     overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
 
-    L.geoJSON(geojson).bindPopup(function (layer) {
+    L.geoJSON(geojson, {
+        style: function(feature) {
+            return {
+                color: "#F012BE",
+                weight: 1,
+                opacity: 0.1,
+                fillOpacity: 0.1
+            }
+        }  
+    }).bindPopup(function (layer) {
         return `
         <h4>Fußgängerzone ${layer.feature.properties.ADRESSE}</h4>
         <p>${layer.feature.properties.ZEITRAUM || ""}</p> 
