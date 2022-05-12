@@ -130,7 +130,23 @@ async function loadLines(url) {
     layerControl.addOverlay(overlay, "Liniennetz Vienna Sightseeing");
     overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
 
-    L.geoJSON(geojson).bindPopup(function (layer) {
+    L.geoJSON(geojson, {
+        style: function(feature) {
+            //console.log(feature)
+
+            let colors = {
+                "Red Line": "#FF4136",
+                "Yellow Line": "#FFDC00",
+                "Blue Line": "#0074D9",
+                "Green Line": "#2ECC40",
+                "Grey Line": "#AAAAAA",
+                "Orange Line": "#FF851B"
+            };
+            return {
+                color: `${colors[feature.properties.LINE_NAME]}`
+            }
+        }
+    }).bindPopup(function (layer) {
     return `
         <h4>${layer.feature.properties.LINE_NAME}</h4>
         von: ${layer.feature.properties.FROM_NAME}
