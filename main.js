@@ -173,7 +173,7 @@ async function loadHotels(url) {
                  <a href="${geoJsonPoint.properties.WEBLINK1}">Weblink</a>
             `;
 
-            if (geoJsonPoint.properties.BETRIEBSART_TXT == "Hotel") {
+            if (geoJsonPoint.properties.BETRIEBSART == "H") {
                 return L.marker(latlng, {
                     icon: L.icon({
                         iconUrl: "icons/hotel_0star.png",
@@ -181,7 +181,7 @@ async function loadHotels(url) {
                         popupAnchor: [0, -37]
                     })
                 }).bindPopup(popup);
-            } else if (geoJsonPoint.properties.BETRIEBSART_TXT == "Pension") {
+            } else if (geoJsonPoint.properties.BETRIEBSART == "P") {
                 return L.marker(latlng, {
                     icon: L.icon({
                         iconUrl: `icons/lodging_0star.png`,
