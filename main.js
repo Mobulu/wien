@@ -10,7 +10,7 @@ let startLayer = L.tileLayer.provider("BasemapAT.grau")
 
 let map = L.map("map", {
     center: [stephansdom.lat, stephansdom.lng],
-    zoom: 14,
+    zoom: 16,
     layers: [
         startLayer
     ]
@@ -195,7 +195,9 @@ async function loadHotels(url) {
     let geojson = await response.json();
     //console.log(geojson);
 
-    let overlay = L.markerClusterGroup();
+    let overlay = L.markerClusterGroup({
+        disableClusteringAtZoom: 17
+    });
     layerControl.addOverlay(overlay, "Hotels und Unterkünfte");
     overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
 
