@@ -143,7 +143,9 @@ async function loadLines(url) {
                 "Orange Line": "#FF851B"
             };
             return {
-                color: `${colors[feature.properties.LINE_NAME]}`
+                color: `${colors[feature.properties.LINE_NAME]}`,
+                weight: 4,
+                dashArray: [10, 6]
             }
         }
     }).bindPopup(function (layer) {
