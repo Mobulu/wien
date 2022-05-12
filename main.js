@@ -195,7 +195,7 @@ async function loadHotels(url) {
     let geojson = await response.json();
     //console.log(geojson);
 
-    let overlay = L.featureGroup();
+    let overlay = L.markerClusterGroup();
     layerControl.addOverlay(overlay, "Hotels und Unterkünfte");
     overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
 
