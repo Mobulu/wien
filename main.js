@@ -201,7 +201,7 @@ async function loadHotels(url) {
     layerControl.addOverlay(overlay, "Hotels und Unterkünfte");
     overlay.addTo(map); //damit wird entschieden ob die Checkbox standardmäßig an- oder ausgeschaltet ist
 
-    L.geoJSON(geojson, {
+    let hotelsLayer = L.geoJSON(geojson, {
         pointToLayer: function (geoJsonPoint, latlng) {
             //L.marker(latlng).addTo(map)
             
@@ -255,6 +255,12 @@ async function loadHotels(url) {
     console.log(form.suchen);
     form.suchen.onclick = function() {
         console.log(form.hotel.value);
+        hotelsLayer.eachLayer(function(marker){
+            console.log(marker)
+            console.log(marker.getLatLng())
+            console.log(marker.getPopup())
+            console.log(marker.feature.properties.BETRIEB)
+        })
     }
 
 }
